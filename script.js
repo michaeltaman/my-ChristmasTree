@@ -30,31 +30,48 @@ document.querySelectorAll('div img').forEach(el => {
     document.addEventListener('touchmove', moveItem);
   }
 
-  function stopDragging(e) {
-    isDragging = false;
-    document.removeEventListener('mousemove', moveItem);
-    document.removeEventListener('touchmove', moveItem);
 
-    // Save the drag stop position
+
+
+function stopDragging(e) {
+  console.log(dragStopPositions.length);
+  isDragging = false;
+  document.removeEventListener('mousemove', moveItem);
+  document.removeEventListener('touchmove', moveItem);
+
+  // Get the bounding rectangle of the Christmas tree image
+  var treeRect = document.querySelector('.tree').getBoundingClientRect();
+
+  // Check if the dropped position is within the bounds of the Christmas tree image
+  const isInsideTree = (e.pageX >= treeRect.left && e.pageX <= treeRect.right && e.pageY >= treeRect.top && e.pageY <= treeRect.bottom);
+
+  // Remove the oldest saved position that is outside the tree bounds
+  dragStopPositions = dragStopPositions.filter(position =>
+    position.x >= treeRect.left && position.x <= treeRect.right &&
+    position.y >= treeRect.top && position.y <= treeRect.bottom
+  );
+
+  // If inside tree and there is space in the array, add the new position
+  if (isInsideTree && dragStopPositions.length < 6) {
     dragStopPositions.push({ x: e.pageX, y: e.pageY });
-
-    // Check if there are 5 saved positions
-    if (dragStopPositions.length === 5) {
-      launchConfettiAnimation();
-    }
   }
 
-  //var audio = new Audio('https://upload.wikimedia.org/wikipedia/commons/3/34/Sound_Effect_-_Door_Bell.ogg');
+  // Check if there are 5 saved positions within the tree bounds to trigger the animation
+  if (dragStopPositions.length === 6) {
+    launchConfettiAnimation();
+  }
+}
+
+
+
+
   var audio = new Audio('./enchanted-chimes-177906.mp3');
 
   function launchConfettiAnimation() {
-    // Your code to launch confetti animation goes here
-    // This function will be called when 5 drag stop positions are saved
     console.log('Launching confetti animation!');
     toggleConfetti();
     audio.play();
-    // Replace console.log with your confetti animation code
-    // For example, you can use libraries like confetti-js to create confetti animation
+
   }
 
   el.addEventListener('mouseup', stopDragging);
