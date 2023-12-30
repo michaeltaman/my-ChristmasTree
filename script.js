@@ -74,6 +74,54 @@ document.querySelectorAll('div img').forEach(el => {
   }
 }*/
 
+function convertDivToButton() {
+  // Select the div
+  var div = document.querySelector('div');
+
+  // Create a parent div
+  var parentDiv = document.createElement('div');
+
+  // Set the parent div's styles to match the div's
+  var divStyle = window.getComputedStyle(div);
+  parentDiv.style.width = divStyle.width;
+  parentDiv.style.height = divStyle.height;
+  parentDiv.style.position = divStyle.position;
+  parentDiv.style.top = divStyle.top;
+  parentDiv.style.right = divStyle.right;
+  parentDiv.style.bottom = divStyle.bottom;
+  parentDiv.style.left = divStyle.left;
+
+  // Create a new button
+  var button = document.createElement('button');
+
+  // Set the button's text
+  button.style.fontFamily = 'Roboto, sans-serif';
+  button.style.fontSize = '20px';
+  button.style.fontWeight = 'bold';
+  button.style.color = 'white';
+  button.innerHTML = 'Game over !!!';
+
+  // Set the button's dimensions to fill the parent div
+  button.style.width = '100%';
+  button.style.height = '100%';
+  button.style.borderRadius = '8px';
+
+
+  button.style.background = 'linear-gradient(to right, #008000, #00FF00)';
+  button.style.boxShadow = 'rgba(60,64,67,0.3) 0px 1px 2px 0px';
+
+  button.addEventListener('click', function() {
+    location.reload();
+  });
+
+  // Replace the div with the parent div
+  div.parentNode.replaceChild(parentDiv, div);
+
+  // Add the button to the parent div
+  parentDiv.appendChild(button);
+}
+
+
 
 
 
@@ -83,6 +131,8 @@ document.querySelectorAll('div img').forEach(el => {
     console.log('Launching confetti animation!');
     toggleConfetti();
     audio.play();
+    // Call the function
+    convertDivToButton();
 
   }
 
