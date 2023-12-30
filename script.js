@@ -31,9 +31,21 @@ document.querySelectorAll('div img').forEach(el => {
   }
 
 
+  function stopDragging(e) {
+    isDragging = false;
+    document.removeEventListener('mousemove', moveItem);
+    document.removeEventListener('touchmove', moveItem);
 
+    // Save the drag stop position
+    dragStopPositions.push({ x: e.pageX, y: e.pageY });
 
-function stopDragging(e) {
+    // Check if there are 5 saved positions
+    if (dragStopPositions.length === 5) {
+      launchConfettiAnimation();
+    }
+  }
+
+/*function stopDragging(e) {
   console.log(dragStopPositions.length);
   isDragging = false;
   document.removeEventListener('mousemove', moveItem);
@@ -60,7 +72,7 @@ function stopDragging(e) {
   if (dragStopPositions.length === 5) {
     launchConfettiAnimation();
   }
-}
+}*/
 
 
 
