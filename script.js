@@ -52,12 +52,12 @@ function stopDragging(e) {
   );
 
   // If inside tree and there is space in the array, add the new position
-  if (isInsideTree && dragStopPositions.length < 6) {
+  if (isInsideTree && dragStopPositions.length < 5) {
     dragStopPositions.push({ x: e.pageX, y: e.pageY });
   }
 
   // Check if there are 5 saved positions within the tree bounds to trigger the animation
-  if (dragStopPositions.length === 6) {
+  if (dragStopPositions.length === 5) {
     launchConfettiAnimation();
   }
 }
