@@ -167,7 +167,7 @@ function convertDivToButton() {
   });
 
   window.addEventListener('pageshow', function(event) {
-    location.reload();
+
   });
 
 });
