@@ -173,9 +173,9 @@ function convertDivToButton() {
 
       // Add your logic here for actions to be taken when the user returns
       // For example, restarting audio or re-initiating certain functionalities
-      if (audio.paused) {
+      //if (audio.paused) {
         audio.play(); // Assuming 'audio' is the reference to your audio element
-      }
+      //}
     }
   });
 
