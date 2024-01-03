@@ -167,7 +167,7 @@ function convertDivToButton() {
   });
 
   window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
+    //if (event.persisted) {
       // The page is loaded from the bfcache
       // This might indicate the user has returned to this page
 
@@ -176,7 +176,7 @@ function convertDivToButton() {
       //if (audio.paused) {
         audio.play(); // Assuming 'audio' is the reference to your audio element
       //}
-    }
+    //}
   });
 
 });
