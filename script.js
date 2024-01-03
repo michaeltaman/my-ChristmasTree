@@ -138,4 +138,17 @@ function convertDivToButton() {
 
   el.addEventListener('mouseup', stopDragging);
   el.addEventListener('touchend', stopDragging);
+
+
+  window.addEventListener('beforeunload', function (e) {
+    // Cancel the event
+    // Stop the audio
+    audio.pause();
+    audio.currentTime = 0;
+
+    if(isRunning()){
+      resumeConfetti();
+    }
+
+  });
 });
