@@ -140,15 +140,30 @@ function convertDivToButton() {
   el.addEventListener('touchend', stopDragging);
 
 
-  window.addEventListener('beforeunload', function (e) {
-    // Cancel the event
-    // Stop the audio
-    audio.pause();
-    audio.currentTime = 0;
+  // If user leaves page  stop the audio
 
-    if(isRunning()){
+  function stopAudio() {
+    if (audioPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+      audioPlaying = false;
+    }
+  }
+
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      stopAudio();
+    }
+  }
+
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+
+
+
+  window.addEventListener('beforeunload', function (e) {
+    stopAudio();
+    if (isRunning()) {
       resumeConfetti();
     }
-
   });
 });
