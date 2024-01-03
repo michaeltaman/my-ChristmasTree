@@ -143,11 +143,9 @@ function convertDivToButton() {
   // If user leaves page  stop the audio
 
   function stopAudio() {
-
       audio.pause();
       audio.currentTime = 0;
       audioPlaying = false;
-
   }
 
   function handleVisibilityChange() {
@@ -167,4 +165,18 @@ function convertDivToButton() {
       resumeConfetti();
     }
   });
+
+  window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // The page is loaded from the bfcache
+      // This might indicate the user has returned to this page
+
+      // Add your logic here for actions to be taken when the user returns
+      // For example, restarting audio or re-initiating certain functionalities
+      if (isRunning()) {
+        audio.play(); // Assuming 'audio' is the reference to your audio element
+      }
+    }
+  });
+
 });
