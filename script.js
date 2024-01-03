@@ -167,17 +167,7 @@ function convertDivToButton() {
   });
 
   window.addEventListener('pageshow', function(event) {
-    let audio2 = new Audio('./enchanted-chimes-177906.mp3');
-    //if (event.persisted) {
-      // The page is loaded from the bfcache
-      // This might indicate the user has returned to this page
-
-      // Add your logic here for actions to be taken when the user returns
-      // For example, restarting audio or re-initiating certain functionalities
-      //if (audio.paused) {
-        audio2.play(); // Assuming 'audio' is the reference to your audio element
-      //}
-    //}
+    location.reload();
   });
 
 });
