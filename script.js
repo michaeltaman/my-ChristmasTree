@@ -143,14 +143,15 @@ function convertDivToButton() {
   // If user leaves page  stop the audio
 
   function stopAudio() {
-    if (audioPlaying) {
+
       audio.pause();
       audio.currentTime = 0;
       audioPlaying = false;
-    }
+
   }
 
   function handleVisibilityChange() {
+    debugger
     if (document.hidden) {
       stopAudio();
     }
